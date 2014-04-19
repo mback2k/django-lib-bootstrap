@@ -5,13 +5,15 @@
   <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>{% block title %}{% endblock %}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% block css %}
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-theme.min.css" />
   {% endblock %}
   <!--[if lt IE 9]>
-  <script type="text/javascript" src="{{ STATIC_URL }}html5shiv/js/html.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}html5shiv/js/html5shiv.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}respondjs/js/respond.min.js"></script>
   <![endif]-->
   {% block extra-head %}{% endblock %}
 {% endspaceless %}
@@ -20,28 +22,21 @@
 {% spaceless %}
   <div class="container">
     <div class="masthead">
-      <h3 class="muted">{% block header %}{% endblock %}</h3>
-      <div class="navbar">
-        <div class="navbar-inner">
-          <div class="container">
-            <ul class="nav">
-            {% block navigation %}
-              {% if user.is_authenticated %}
-              <li><a href="{% bootstrap_settings_value 'LOGOUT_URL' %}" title="Logout">Logout</a></li>
-              {% else %}
-              <li><a href="{% bootstrap_settings_value 'LOGIN_URL' %}" title="Login">Login</a></li>
-              {% endif %}
-            {% endblock %}
-            </ul>
-          </div>
-        </div>
-      </div>
+      <h3 class="text-muted">{% block header %}{% endblock %}</h3>
+      <ul class="nav nav-justified">
+      {% block navigation %}
+        {% if user.is_authenticated %}
+        <li><a href="{% bootstrap_settings_value 'LOGOUT_URL' %}" title="Logout">Logout</a></li>
+        {% else %}
+        <li><a href="{% bootstrap_settings_value 'LOGIN_URL' %}" title="Login">Login</a></li>
+        {% endif %}
+      {% endblock %}
+      </ul>
     </div>
     {% block content %}{% endblock %}
-    <hr>
     <div class="footer">
     {% block footer %}
-      <p>Layout based on <a href="http://twitter.github.io/bootstrap/">Bootstrap</a></p>
+      <p class="text-center">Layout based on <a href="http://getbootstrap.com/">Bootstrap</a></p>
     {% endblock %}
     </div>
   </div>
