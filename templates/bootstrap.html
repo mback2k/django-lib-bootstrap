@@ -33,6 +33,16 @@
       {% endblock %}
       </ul>
     </div>
+    {% block content-header %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert{% if message.tags %} alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ message|safe }}
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endblock %}
     {% block content %}{% endblock %}
     <div class="footer">
     {% block footer %}
