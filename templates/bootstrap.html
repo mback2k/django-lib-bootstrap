@@ -22,14 +22,20 @@
 {% spaceless %}
   <div class="container">
     <div class="masthead">
+      <p class="pull-right">
+        {% if user.is_authenticated %}
+        <a href="{% bootstrap_settings_value 'LOGOUT_URL' %}" class="btn btn-danger" role="button" title="Logout">
+          <span class="glyphicon glyphicon-off"></span> Logout
+        </a>
+        {% else %}
+        <a href="{% bootstrap_settings_value 'LOGIN_URL' %}" class="btn btn-success" role="button" title="Login">
+          <span class="glyphicon glyphicon-user"></span> Login
+        </a>
+        {% endif %}
+      </p>
       <h3 class="text-muted">{% block header %}{% endblock %}</h3>
       <ul class="nav nav-justified">
       {% block navigation %}
-        {% if user.is_authenticated %}
-        <li><a href="{% bootstrap_settings_value 'LOGOUT_URL' %}" title="Logout">Logout</a></li>
-        {% else %}
-        <li><a href="{% bootstrap_settings_value 'LOGIN_URL' %}" title="Login">Login</a></li>
-        {% endif %}
       {% endblock %}
       </ul>
     </div>
